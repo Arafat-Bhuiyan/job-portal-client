@@ -5,8 +5,8 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/socialLogin";
 
-export const Register = () => {
-  const { createUser } = useContext(AuthContext);
+export const SignIn = () => {
+  const { signInUser } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -17,24 +17,15 @@ export const Register = () => {
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Password validation regex: Minimum 6 characters, at least one uppercase and one number
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
-
     // Email validation
     if (!emailRegex.test(email)) {
       return toast.error("Please enter a valid email address.");
     }
 
-    // Password validation
-    if (!passwordRegex.test(password)) {
-      return toast.error(
-        "Password must be at least 6 characters long, include one uppercase letter and one number."
-      );
-    }
-
-    createUser(email, password)
+    signInUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        const user = result.user;
+        console.log(user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -45,7 +36,6 @@ export const Register = () => {
     console.log("Password:", password);
     toast.success("Validation passed! Proceeding to login...");
   };
-
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -53,7 +43,7 @@ export const Register = () => {
           <Lottie animationData={registerLottieData}></Lottie>
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <h1 className="text-5xl font-bold ml-8 mt-4">Register now!</h1>
+          <h1 className="text-5xl font-bold ml-8 mt-4">Login now!</h1>
           <form onSubmit={handleSubmit} className="card-body">
             <div className="form-control">
               <label className="label">
@@ -83,10 +73,9 @@ export const Register = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-info">Register</button>
+              <button className="btn btn-info">Login</button>
             </div>
           </form>
-
           <SocialLogin />
         </div>
       </div>
