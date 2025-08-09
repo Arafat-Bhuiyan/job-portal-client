@@ -4,8 +4,14 @@ import { toast } from "react-toastify";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import SocialLogin from "../shared/socialLogin";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("in signin ", location);
+  const from = location.state || "/";
+  
   const { signInUser } = useContext(AuthContext);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +31,7 @@ export const SignIn = () => {
     signInUser(email, password)
       .then((result) => {
         const user = result.user;
+        navigate(from);
         console.log(user);
       })
       .catch((error) => {

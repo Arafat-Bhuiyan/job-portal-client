@@ -1,10 +1,11 @@
-import React from 'react'
 import { Banner } from './Banner'
+import HotJobs from './HotJobs';
 
 export const Home = () => {
   return (
-    <div>
+    <div className='w-full'>
       <Banner />
+      <HotJobs />
     </div>
   )
 }
