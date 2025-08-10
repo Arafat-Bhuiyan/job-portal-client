@@ -9,10 +9,10 @@ export const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink>About</NavLink>
+        <NavLink to="/myApplications">My Applications</NavLink>
       </li>
     </>
   );
@@ -54,10 +54,10 @@ export const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
+        <Link to="/" className="flex items-center text-xl font-semibold">
           <img src={logo} />
           <h3>Job Archer</h3>
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
