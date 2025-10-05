@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import { toast } from "react-toastify";
-import logo from "../../assets/icons/smallLogo.png"
+import logo from "../../assets/icons/smallLogo.png";
 
 export const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -11,9 +11,23 @@ export const Navbar = () => {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      <li>
-        <NavLink to="/myApplications">My Applications</NavLink>
-      </li>
+      {/* for applicant links. check roles as well */}
+      {user && <>
+        <li>
+          <NavLink to="/myApplications">My Applications</NavLink>
+        </li>
+        </>
+        
+      }
+
+      {/* for recruiter links. check roles as well */}
+      {
+        user && <>
+        <li>
+          <NavLink to="/addJob">Add Job</NavLink>
+        </li>
+        </>
+      }
     </>
   );
 
@@ -65,11 +79,18 @@ export const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <>
-            <button onClick={handleSignOut} className="btn btn-outline btn-info">Sign Out</button>
+            <button
+              onClick={handleSignOut}
+              className="btn btn-outline btn-info"
+            >
+              Sign Out
+            </button>
           </>
         ) : (
           <>
-            <Link to="/register" className="mr-2 btn btn-outline btn-info">Register</Link>
+            <Link to="/register" className="mr-2 btn btn-outline btn-info">
+              Register
+            </Link>
             <Link to="/signin" className="btn btn-info">
               Sign In
             </Link>
